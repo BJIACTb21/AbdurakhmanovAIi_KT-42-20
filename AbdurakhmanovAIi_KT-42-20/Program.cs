@@ -1,4 +1,5 @@
 using AbdurakhmanovAIi_KT_42_20.Database;
+using AbdurakhmanovAIi_KT_42_20.Middlewares;
 using AbdurakhmanovAIi_KT_42_20.ServiceExtensions;
 using Microsoft.EntityFrameworkCore;
 using NLog;
@@ -6,7 +7,6 @@ using NLog.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 var logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
-
 // Add services to the container.
 
 try
@@ -33,6 +33,8 @@ try
         app.UseSwagger();
         app.UseSwaggerUI();
     }
+
+    app.UseMiddleware<ExceptionHandlerMiddleware>();
 
     app.UseAuthorization();
 
